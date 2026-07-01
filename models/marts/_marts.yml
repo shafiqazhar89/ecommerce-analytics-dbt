@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "One row per order: revenue, line count, delivery time, and status."
+    columns:
+      - name: order_id
+        description: "Primary key — unique identifier for each order."
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key to dim_customers."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+  - name: dim_customers
+    description: "One row per customer, with demographic and geographic attributes."
+    columns:
+      - name: customer_id
+        description: "Primary key — unique identifier for each customer."
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    description: "One row per product, with category, brand, and price attributes."
+    columns:
+      - name: product_id
+        description: "Primary key — unique identifier for each product."
+        data_tests:
+          - unique
+          - not_null
