@@ -56,6 +56,14 @@ business questions answered
 - `dim_products` — one row per product
 - `fct_orders` — **the central fact table: one row per order**, with revenue, line count, delivery time, and status. Line items are aggregated to order grain in a CTE, then joined one-to-one to the order spine with a `left join` so no order is ever silently dropped.
 
+## Dashboard
+An interactive Looker Studio dashboard built on the BigQuery marts above — 
+revenue trend, top categories, order status breakdown, and revenue by country.
+
+**[View live dashboard →](https://datastudio.google.com/s/mLbKl7XOYOI)**
+
+![Dashboard screenshot](docs/dashboard.png)
+
 ## Data quality
 
 Nine tests run on every build, across four test types — a focused suite that proves the model's integrity rather than padding the count:
