@@ -1,5 +1,6 @@
 with customers as (
-    select * from {{ ref('stg_users') }}
+    select * from {{ ref('dim_customers_scd') }}
+    where is_current = true
 )
 select
     customer_id,

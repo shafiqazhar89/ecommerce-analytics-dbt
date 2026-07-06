@@ -41,3 +41,23 @@ models:
         data_tests:
           - unique
           - not_null
+      
+  - name: dim_customers_scd
+    description: >
+      SCD Type 2 customer dimension. Each row represents one version of a customer.
+      A customer who has changed city, state, country, or traffic_source will have
+      multiple rows — one per change — with validity windows and an is_current flag.
+    columns:
+      - name: customer_key
+        description: Surrogate key — unique per customer version (hash of customer_id + valid_from)
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Natural key — the customer's original ID, constant across all versions
+        tests:
+          - not_null
+      - name: is_current
+        description: True for the customer's current record only
+        tests:
+          - not_null
